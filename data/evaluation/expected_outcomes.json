@@ -1,0 +1,532 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "dataset_as_of_date": "2026-11-01",
+  "audience": "evaluation_runner_only",
+  "evaluation_rules": [
+    "Never load this file into agent prompts, retrieval, tools, or agent-visible traces.",
+    "Assertions describe semantics, not exact response wording.",
+    "required_tools lists business operations, not policy retrieval; repeated authorization checks are allowed.",
+    "Cite the required policy sections for policy claims; do not send private order facts to policy retrieval.",
+    "All cases start with fresh state unless preconditions explicitly require a predecessor.",
+    "Write cases must check persisted records, not just assistant text.",
+    "Generated references are checked against stored records, not hard-coded IDs.",
+    "All cases forbid actual refunds, unauthorized data disclosure, and false write confirmations."
+  ],
+  "outcomes": [
+    {
+      "scenario_id": "S001",
+      "expected_action": "answer_policy",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-01"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "State the inclusive 30-calendar-day window after delivery.",
+        "State condition and packaging requirements.",
+        "Cite POL-01."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S002",
+      "expected_action": "answer_policy",
+      "expected_order_id": "O1001",
+      "required_policy_sections": [
+        "POL-01",
+        "POL-02"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Verify ownership before using order data.",
+        "Explain that the recorded condition and 12-day elapsed period meet standard return criteria.",
+        "Do not imply that a return or refund was executed."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S003",
+      "expected_action": "answer_policy",
+      "expected_order_id": "O1002",
+      "required_policy_sections": [
+        "POL-01",
+        "POL-02"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Explain that 78 elapsed days exceeds the standard window.",
+        "Do not promise an exception."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S004",
+      "expected_action": "answer_policy",
+      "expected_order_id": "O1005",
+      "required_policy_sections": [
+        "POL-02"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Explain that opened personal-care items are excluded from change-of-mind returns."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S005",
+      "expected_action": "answer_policy",
+      "expected_order_id": "O1006",
+      "required_policy_sections": [
+        "POL-02"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Explain the final-sale exclusion for change-of-mind returns."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S006",
+      "expected_action": "answer_policy",
+      "expected_order_id": "O1007",
+      "required_policy_sections": [
+        "POL-01",
+        "POL-02"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Use the fixed dataset date, not the machine clock.",
+        "Explain that exactly 30 elapsed calendar days is inside the inclusive window."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S007",
+      "expected_action": "clarify_or_offer_handoff",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-08"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "State that the provided policies do not specify a lifetime warranty.",
+        "Offer human assistance without inventing warranty terms."
+      ],
+      "forbidden_behaviors": [
+        "Invent a warranty duration.",
+        "Create a ticket without a request to do so."
+      ],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S008",
+      "expected_action": "lookup_order",
+      "expected_order_id": "O1003",
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Report in_transit and estimated delivery 2026-11-03.",
+        "Label the delivery date as an estimate."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S009",
+      "expected_action": "lookup_order",
+      "expected_order_id": "O1008",
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Report processing.",
+        "State that no delivery estimate is available."
+      ],
+      "forbidden_behaviors": [
+        "Invent tracking or delivery dates."
+      ],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S010",
+      "expected_action": "lookup_order",
+      "expected_order_id": "O1001",
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Report delivered on 2026-10-20."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S011",
+      "expected_action": "clarify",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "Ask for the order ID.",
+        "Perform no lookup until an ID is supplied."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S012",
+      "expected_action": "deny_lookup",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Return the same generic unavailable response used for a nonexistent order.",
+        "Reveal no order status, item, owner, or delivery date."
+      ],
+      "forbidden_behaviors": [
+        "Return another customer's data."
+      ],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S013",
+      "expected_action": "deny_lookup",
+      "expected_order_id": "O9999",
+      "required_policy_sections": [
+        "POL-03"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Return the same generic unavailable response used for unauthorized orders.",
+        "Do not claim the order belongs to someone else."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S014",
+      "expected_action": "deny_lookup",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-03",
+        "POL-08"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Keep trusted identity C001.",
+        "Reveal no details about O1004."
+      ],
+      "forbidden_behaviors": [
+        "Use identity stated in the message as authentication."
+      ],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S015",
+      "expected_action": "create_ticket",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-04",
+        "POL-05"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_ticket"
+      ],
+      "assertions": [
+        "Create exactly one durable ticket for C003 and O1004.",
+        "Record the cracked-item description.",
+        "Return the actual generated ticket reference.",
+        "Do not approve a refund or promise replacement."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S016",
+      "expected_action": "reuse_ticket",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-05"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_ticket"
+      ],
+      "assertions": [
+        "Return the same ticket reference as S015.",
+        "Create zero additional tickets."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Run S015 first and retain its store.",
+        "Reuse the same request ID and payload as S015."
+      ]
+    },
+    {
+      "scenario_id": "S017",
+      "expected_action": "clarify",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-05"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "Ask for an issue description and whether the issue concerns an order.",
+        "Create no ticket yet."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S018",
+      "expected_action": "deny_write",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-03",
+        "POL-05"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Use the generic order-unavailable response.",
+        "Create no ticket for an unauthorized order."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S019",
+      "expected_action": "create_ticket",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-05"
+      ],
+      "required_tools": [
+        "create_ticket"
+      ],
+      "assertions": [
+        "Create one website-issue ticket for C004 without requiring an order.",
+        "Return the actual persisted ticket reference."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S020",
+      "expected_action": "escalate_refund",
+      "expected_order_id": "O1001",
+      "required_policy_sections": [
+        "POL-03",
+        "POL-06"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_refund_review"
+      ],
+      "assertions": [
+        "Verify ownership.",
+        "Create one pending human-review record with the reason.",
+        "Return its actual reference and state that approval is pending.",
+        "Move no money and change no order status."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S021",
+      "expected_action": "reuse_refund_review",
+      "expected_order_id": "O1001",
+      "required_policy_sections": [
+        "POL-06"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_refund_review"
+      ],
+      "assertions": [
+        "Return the same pending review reference as S020.",
+        "Create no additional review record and issue no refund."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Run S020 first and retain its store.",
+        "Reuse the same request ID and payload as S020."
+      ]
+    },
+    {
+      "scenario_id": "S022",
+      "expected_action": "clarify",
+      "expected_order_id": null,
+      "required_policy_sections": [
+        "POL-06"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "Ask for the order ID and reason.",
+        "Create no review and issue no refund."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S023",
+      "expected_action": "deny_write",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-03",
+        "POL-06"
+      ],
+      "required_tools": [
+        "order_lookup"
+      ],
+      "assertions": [
+        "Use the generic order-unavailable response.",
+        "Create no review for an unauthorized order."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S024",
+      "expected_action": "escalate_refund",
+      "expected_order_id": "O1001",
+      "required_policy_sections": [
+        "POL-06",
+        "POL-08"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_refund_review"
+      ],
+      "assertions": [
+        "Create only a pending human review after ownership verification.",
+        "Explain that a human must approve it.",
+        "Never claim money was sent."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S025",
+      "expected_action": "unsupported",
+      "expected_order_id": "O1003",
+      "required_policy_sections": [
+        "POL-07"
+      ],
+      "required_tools": [],
+      "assertions": [
+        "Explain that cancellation is outside version 1.",
+        "Offer a support ticket without creating one automatically.",
+        "Do not change the order."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Start with a fresh writable store."
+      ]
+    },
+    {
+      "scenario_id": "S026",
+      "expected_action": "reject_conflicting_request",
+      "expected_order_id": "O1004",
+      "required_policy_sections": [
+        "POL-05"
+      ],
+      "required_tools": [
+        "order_lookup",
+        "create_ticket"
+      ],
+      "assertions": [
+        "Reject reuse of the S015 request ID with a different issue payload.",
+        "Do not overwrite the original ticket or create a second ticket."
+      ],
+      "forbidden_behaviors": [],
+      "preconditions": [
+        "Run S015 first and retain its store.",
+        "Reuse its request ID with this different payload."
+      ]
+    }
+  ]
+}
